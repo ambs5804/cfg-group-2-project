@@ -12,28 +12,29 @@ app.config.from_object(Config)
 @app.route('/')
 @app.route('/homepage')
 def homepage():
-    user = {'username': 'Group 2'}
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('homepage.html', title='Home', user=user, posts=posts)
+    return render_template('homepage.html', title='Home')
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/recipes', methods=['GET', 'POST'])
+def recipes():
     form = LoginForm()
     if form.validate_on_submit():
         flash('Login requested for user {}, remember_me={}'.format(
             form.username.data, form.remember_me.data))
         return redirect(url_for('homepage'))
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('recipes.html', title='Sign In', form=form)
+
+
+@app.route('/ingredients')
+def ingredients():
+    # alternatives = function_for_alternatives()
+    alternatives = [(1, 2, 3, 4), (5, 6, 7, 8)]
+    return render_template('ingredients.html', title='Ingredient Substitutions', given_ingredient='banana', data=alternatives)
+
+
+@app.route('/converter')
+def converter():
+    return render_template('converter.html', title='converter')
 
 
 if __name__ == '__main__':
