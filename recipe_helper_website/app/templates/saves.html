@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Saved Recipes</h1>
+{% if data %}
+<span> {{data}} </span>
+{% else %}
+<span> No saves</span>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Unit Converter</h1>
+<div>
+  <label for="unit 1">Choose a unit</label>
+  <input placeholder="100">
+  <select name="unit 1">
+    <option value="gram">Gram</option>
+    <option value="cup">Cup</option>
+    <option value="ml">Militre</option>
+    <option value="oz">Ounce</option>
+  </select>
+</div>
+<div>
+  <label for="unit 2">convert to:</label>
+  <input placeholder="100">
+  <select name="unit 2">
+    <option value="gram">Gram</option>
+    <option value="cup">Cup</option>
+    <option value="ml">Militre</option>
+    <option value="oz">Ounce</option>
+  </select>
+</div>
+{% endblock %}

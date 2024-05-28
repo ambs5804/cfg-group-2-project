@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+<head>
+  {% if title %}
+  <title>{{ title }} - Kitchen Assisant</title>
+  {% else %}
+  <title>Welcome to Kitchen Assisant</title>
+  {% endif %}
+  <link href="{{url_for('static', filename='styles/style.css')}}" rel="stylesheet" />
+</head>
+
+<body>
+  <div>
+    Tabs
+    <a href="{{ url_for('homepage') }}">Home</a>
+    <a href="{{ url_for('recipes') }}">Recipe Search</a>
+    <a href="{{ url_for('ingredients') }}">Ingredient substitutions</a>
+    <a href="{{ url_for('converter') }}">Units converter</a>
+    <a href="{{ url_for('saves') }}"> Saved Recipes</a>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</body>
+
+</html>
