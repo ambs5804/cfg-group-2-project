@@ -4,7 +4,7 @@ from flask import Flask, render_template, flash, redirect, url_for, session, req
 # redirect(). This function instructs the client web browser to automatically navigate to a different page, given as an argument
 from config import Config
 # from forms import LoginForm
-# from converter import convert_units
+from converter import convert_units
 
 app = Flask(__name__)
 SESSION_TYPE = "filesystem"
@@ -38,7 +38,7 @@ def homepage():
 def recipes():
     ingredients = request.args.get('ingredients')
     print(session['test'])
-    # edamame_search_functiion (ingredients)
+    # edamame_search_function (ingredients)
     recipe_data = f' these are the searched ingredients {ingredients}'
     return render_template("recipes.html", data=recipe_data)
 
@@ -50,10 +50,22 @@ def ingredients():
     return render_template('ingredients.html', title='Ingredient Substitutions', given_ingredient='banana', data=alternatives)
 
 
+# @app.route('/converter', methods=['GET', 'POST'])
+# def converter():
+#     return render_template('converter.html', title='converter')
+
 @app.route('/converter', methods=['GET', 'POST'])
 def converter():
-    return render_template('converter.html', title='converter')
-
+    result = None
+    if request.method == 'POST':
+        try:
+            amount = float(request.form['amount'])
+            from_unit = request.form['from_unit']
+            to_unit = request.form['to_unit']
+            result = convert_units(amount, from_unit, to_unit)
+        except (ValueError, KeyError):
+            result = None
+    return render_template('converter.html', title='Converter', result=result)
 
 @app.route('/saves')
 def saves():
