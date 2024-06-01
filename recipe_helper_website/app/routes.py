@@ -63,8 +63,8 @@ def converter():
             from_unit = request.form['from_unit']
             to_unit = request.form['to_unit']
             result = convert_units(amount, from_unit, to_unit)
-        except (ValueError, KeyError):
-            result = None
+        except ValueError:
+            result = "Please insert a valid value"
     return render_template('converter.html', title='Converter', result=result)
 
 @app.route('/saves')

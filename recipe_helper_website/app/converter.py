@@ -1,6 +1,13 @@
 
 # Create a dictionary to store unit conversions
 unit_conversions = {  # unit1 to unit2 (1 cup = 16 tablespoons)
+    ('cups', 'cups'): 1,
+    ('tbsp', 'tbsp'): 1,
+    ('tsp', 'tsp'): 1,
+    ('g', 'g'): 1,
+    ('oz', 'oz'): 1,
+    ('fl oz', 'fl oz'): 1,
+    ('ml', 'ml'): 1,
     ('cups', 'tbsp'): 16,
     ('tbsp', 'cups'): 1/16,
     ('cups', 'g'): 250,
