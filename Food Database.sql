@@ -1,5 +1,18 @@
 CREATE DATABASE SUBSTITUTIONS;
 
+CREATE TABLE vegan_alternatives (
+original_ingredient VARCHAR(100),
+quantity integer,
+subbed_ingredient VARCHAR (100),
+subbed_quantity integer
+);
+
+-- INSERT INTO vegan_alternatives (original_ingredient, quantity, subbed_ingredient, subbed_quantity)
+VALUES ('cows milk', 50, 'oat milk', 50),
+('dairy_butter',50,'margerine',50);
+
+DROP TABLE vegan_alternatives;
+
 CREATE TABLE FoodItems(
 Food_ID INTEGER,
 Food_Name VARCHAR(100),
