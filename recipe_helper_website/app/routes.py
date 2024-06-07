@@ -23,7 +23,6 @@ def recipe_search(ingredient):
     return data['hits']
 
 def save_to_json(recipes, ingredient):
-    # Keep this function as it is
     if recipes:
         file_name = f"{ingredient}_recipes.json"
         recipes_list = []
@@ -48,6 +47,15 @@ def save_to_json(recipes, ingredient):
     else:
         print("No recipes found")
 
+# Connect to the MySQL database
+def connect_db():
+    conn = mysql.connector.connect(
+        host='localhost',    #Need to update the DB details
+        user='your_username',
+        password='your_password',
+        database='your_database'
+    )
+    return conn
 @app.route('/')
 @app.route('/homepage')
 def homepage():
@@ -77,9 +85,18 @@ def recipes():
 
 @app.route('/ingredients')
 def ingredients():
-    # alternatives = function_for_alternatives()
-    alternatives = [(1, 2, 3, 4), (5, 6, 7, 8)]
-    return render_template('ingredients.html', title='Ingredient Substitutions', given_ingredient='banana', data=alternatives)
+    conn = connect_db()
+    substitutes = []
+    if conn:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT Original_ingredient, Alternative_ingredient, reason FROM FoodItems") #
+            substitutes = cursor.fetchall()
+        except Error as e:
+            print(f"An error occurred while fetching ingredient substitutes: {e}")
+        finally:
+            conn.close()
+    return render_template('ingredients.html', title='Ingredient Substitutions', substitutes=substitutes)
 
 # @app.route('/converter', methods=['GET', 'POST'])
 # def converter():
