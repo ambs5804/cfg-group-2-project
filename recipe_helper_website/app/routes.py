@@ -1,59 +1,16 @@
-from sql_call_file import sql_function
 from flask import Flask, render_template, request, session
 from web_environ_config import Config
 from converter import convert_units
 from recipe_constructor import recipe_constructor
+from api_utils import recipe_search
 import secrets
 import requests
-import json
 
 app = Flask(__name__)
 # Keep this line to generate a random secret key
 app.secret_key = secrets.token_hex(16)
-SESSION_TYPE = "filesystem"
 
 app.config.from_object(Config)
-
-# Keep the recipe_search and save_to_json functions as they are
-
-
-def recipe_search(ingredient):
-    # Replace 'ac2be905' and '0809ac9cd1c28ee2e43b387a5c182265' with actual values
-    app_id = 'ac2be905'  # Edamam API app ID
-    app_key = '0809ac9cd1c28ee2e43b387a5c182265'  # Edamam API app key
-    result = requests.get(
-        'https://api.edamam.com/search?q={}&app_id={}&app_key={}'.format(
-            ingredient, app_id, app_key)
-    )
-    data = result.json()
-    return data['hits']
-
-
-def save_to_json(recipes, ingredient):
-    # Keep this function as it is
-    if recipes:
-        file_name = f"{ingredient}_recipes.json"
-        recipes_list = []
-
-        for recipe in recipes:
-            recipe_info = recipe['recipe']
-            recipe_name = recipe_info['label']
-            recipe_url = recipe_info['url']
-            recipe_image = recipe_info.get('image')  # Updated to include image
-            ingredients = recipe_info['ingredientLines']
-            recipes_list.append({
-                'Recipe': recipe_name,
-                'URL': recipe_url,
-                'Image': recipe_image,  # Updated to include image
-                'Ingredients': ingredients
-            })
-
-        with open(file_name, 'w', encoding='utf-8') as file:
-            json.dump(recipes_list, file, ensure_ascii=False, indent=4)
-
-        print(f"Recipes saved to {file_name}")
-    else:
-        print("No recipes found")
 
 
 @app.route('/')
@@ -62,28 +19,16 @@ def homepage():
     session['test'] = 'hello'
     return render_template('homepage.html', title='Home')
 
-# @app.route('/recipes', methods=['GET', 'POST'])
-# def recipes():
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         flash('Login requested for user {}, remember_me={}'.format(
-#             form.username.data, form.remember_me.data))
-#         return redirect(url_for('homepage'))
-#     return render_template('recipes.html', title='Sign In', form=form)
-
 
 @app.route('/recipes', methods=['GET', 'POST'])
 def recipes():
-    ingredients = request.args.get('ingredients')
-    print(session['test'])
-    # edamame_search_function (ingredients)
-    # Call the recipe_search function to fetch recipe data
-    recipe_data = recipe_search(ingredients)
-    # Save fetched recipe data to JSON
-    wip = save_to_json(recipe_data, ingredients)
-    # input WIP recipe_constructor()
-    formatted_data = recipe_constructor(wip)
-    return render_template("recipes.html", data=formatted_data)
+    try:
+        ingredients = request.args.get('ingredients')
+        mapped_api_data = recipe_search(ingredients)
+        formatted_data = recipe_constructor(mapped_api_data)
+        return render_template("recipes.html", data=formatted_data)
+    except:  # error:
+        pass  # similar to "recipe not found"
 
 
 @app.route('/ingredients')
@@ -91,10 +36,6 @@ def ingredients():
     ingredient = request.args.get('ingredients')
     data = sql_function(ingredient)
     return render_template('ingredients.html', title='Ingredient Substitutions', data=data)
-
-# @app.route('/converter', methods=['GET', 'POST'])
-# def converter():
-#     return render_template('converter.html', title='converter')
 
 
 @app.route('/converter', methods=['GET', 'POST'])
