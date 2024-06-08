@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Ingredient substitution finder</h1>
+<input placeholder="baking soda, lemongrass etc.">
+<button onclick="">Search</button>
+<h2>Alternatives for {{given_ingredient}}</h2>
+<table>
+  <thead>
+    <tr>
+      <th> Name</th>
+      <th> amount to substiute</th>
+      <th> column 3</th>
+      <th> column 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data%}
+    <tr>
+      <td>{{row[0]}}</td>
+      <td>{{row[1]}}</td>
+      <td>{{row[2]}}</td>
+      <td>{{row[3]}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+{% endblock %}

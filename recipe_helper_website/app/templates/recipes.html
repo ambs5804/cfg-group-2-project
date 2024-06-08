@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Recipe search</h1>
+<form action="/recipes">
+  <input type="text" name="ingredients" id="recipe_id" placeholder="Enter your ingredients" />
+  <button type="submit">Search</button>
+</form>
+{% if data %}
+{% for row in data%}
+<div>
+  <a href="{{api_url}}" target="blank">
+    <img src="{{api_img}}">
+  </a>
+  <ol>
+    <li>{{row.title}}</li>
+    <button onclick="">Save</button>
+  </ol>
+
+</div>
+
+{%endfor%}
+{% else %}
+{% endif %}
+
+{% endblock %}
