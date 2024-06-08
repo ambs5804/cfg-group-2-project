@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request
 from web_environ_config import Config
 from converter import convert_units
 from recipe_constructor import recipe_constructor
 from api_utils import recipe_search
 import secrets
-import requests
 
 app = Flask(__name__)
 # Keep this line to generate a random secret key
