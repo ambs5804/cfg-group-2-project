@@ -1,9 +1,9 @@
 import re
 
-from Id_assigner import ID
-# find all units
-unit_pattern = r"(cup|oz|ml|kg|tsp|tbsp|cups|fl oz)"
-#
+from classes.Ingredient_class import Ingredient
+
+from classes.Id_assigner import ID
+
 pattern1 = re.compile(r"(\d+\s?\w+)\/\d+\w+", re.MULTILINE)
 # brackets  (3 1/2 cups)
 pattern2 = re.compile(
@@ -25,15 +25,17 @@ pattern9 = re.compile(r"ounces?|OZ", re.IGNORECASE)
 
 
 class Recipe:
-    def __init__(self, title, url, ingredients):
+
+    def __init__(self, title, url, img, ingredients):
         self.id = ID().make_id()
         self.title = title
         self.url = url
+        self.img = img
         self.ingredients = Recipe._standardise_ingredients(ingredients)
 
   # debugging
     def __str__(self):
-        return f"{self.id} - {self.title} - {self.url} - {self.ingredients}"
+        return f"{self.id} - {self.title} - {self.url} - {self.img} - {self.ingredients}"
 
     @staticmethod
     def _standardise_ingredients(ingredients):
@@ -68,22 +70,3 @@ class Recipe:
         standardised = re.sub(pattern9, substitution9, standardised, 0)
 
         return Ingredient(standardised)
-
-
-class Ingredient:
-
-    def __init__(self, ingredient):
-        if bool(re.search(unit_pattern, ingredient)):
-            self.convertable = True
-            split = re.split(unit_pattern, ingredient, maxsplit=1, flags=re.I)
-            self.quantity = split[0]
-            self.unit = split[1]
-            self.item = split[2]
-        else:
-            self.quantity = None
-            self.unit = None
-            self.item = ingredient
-            self.convertable = False
-
-    def __repr__(self):
-        return f"{self.quantity} - {self.unit} - {self.item} - {self.convertable}"
