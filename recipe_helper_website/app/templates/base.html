@@ -11,18 +11,19 @@
 </head>
 
 <body>
-  <div>
-    Tabs
-    <a href="{{ url_for('homepage') }}">Home</a>
-    <a href="{{ url_for('recipes') }}">Recipe Search</a>
-    <a href="{{ url_for('ingredients') }}">Ingredient substitutions</a>
-    <a href="{{ url_for('converter') }}">Units converter</a>
-    <a href="{{ url_for('saves') }}"> Saved Recipes</a>
+  <div class="content-box">
+    <div class="tab-header">
+    <a class="tab-button" href="{{ url_for('homepage') }}">Home</a>
+    <a class="tab-button" href="{{ url_for('recipes') }}">Recipe Search</a>
+    <a class="tab-button" href="{{ url_for('ingredients') }}">Ingredient substitutions</a>
+    <a class="tab-button" href="{{ url_for('converter') }}">Units converter</a>
+    <a class="tab-button" href="{{ url_for('saves') }}"> Saved Recipes</a>
+    </div>
     <hr>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul>
-      {% for message in messages %}
+       {% for message in messages %}
       <li>{{ message }}</li>
       {% endfor %}
     </ul>

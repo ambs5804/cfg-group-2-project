@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Unit Converter</h1>
+<h1 class="header1">Unit Converter</h1>
 <form method="post">
 <div>
         <label for="amount">Amount:</label>
@@ -30,7 +30,7 @@
             <option value="fl oz">Fluid Ounce</option>7
         </select><br><br>
     </div>
-    <input type="submit" value="Convert">
+    <input class="button" type="submit" value="Convert">
 </form>
 
 {% if result is not none %}
