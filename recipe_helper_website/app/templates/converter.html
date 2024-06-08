@@ -2,6 +2,7 @@
 {% block content %}
 <h1 class="header1">Unit Converter</h1>
 <form method="post">
+<div class="converter-box" >
 <div>
         <label for="amount">Amount:</label>
         <input type="text" id="amount" name="amount" required placeholder="100"><br><br>
@@ -27,11 +28,13 @@
             <option value="oz">Ounce</option>
             <option value="tbsp">Tablespoon</option>
             <option value="tsp">Teaspoon</option>
-            <option value="fl oz">Fluid Ounce</option>7
+            <option value="fl oz">Fluid Ounce</option>
         </select><br><br>
+
     </div>
     <input class="button" type="submit" value="Convert">
 </form>
+    </div>
 
 {% if result is not none %}
     <h2>Result: {{ result }}</h2>

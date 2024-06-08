@@ -13,6 +13,14 @@ body {
     margin: 20px auto;
  }
 
+.converter-box {
+    background-color: #ecf5eb;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 20px auto;
+ }
+
 .button {
     background-color: #4CAF50;
     border: none;
@@ -55,7 +63,7 @@ body {
  }
 
 .tab-button {
-    background-color: #f57971;
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 5px 5px;
@@ -70,7 +78,7 @@ body {
   }
 
 .tab-button:hover {
-  background-color: #4CAF50;
+  background-color: #f57971;
 }
 
 .input-box {
