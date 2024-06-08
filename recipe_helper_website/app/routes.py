@@ -47,7 +47,7 @@ def converter():
             to_unit = request.form['to_unit']
             result = convert_units(amount, from_unit, to_unit)
         except ValueError:
-            result = "Please insert a valid value"
+            result = "Please insert a valid amount"
     return render_template('converter.html', title='Converter', result=result)
 
 
