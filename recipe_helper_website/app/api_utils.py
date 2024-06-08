@@ -7,7 +7,6 @@ import requests
 
 # json_data_mappper previously called saved_to_json- now just mapping data, no longer saving to json
 
-
 def json_data_mapper(recipes):
     recipes_list = []
 
