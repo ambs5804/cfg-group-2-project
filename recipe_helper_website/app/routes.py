@@ -1,26 +1,33 @@
+from sql_call_file import sql_function
 from flask import Flask, render_template, request, session
-from config import Config
+from web_environ_config import Config
 from converter import convert_units
+from recipe_constructor import recipe_constructor
 import secrets
 import requests
 import json
 
 app = Flask(__name__)
-app.secret_key = secrets.token_hex(16)  # Keep this line to generate a random secret key
+# Keep this line to generate a random secret key
+app.secret_key = secrets.token_hex(16)
 SESSION_TYPE = "filesystem"
 
 app.config.from_object(Config)
 
 # Keep the recipe_search and save_to_json functions as they are
+
+
 def recipe_search(ingredient):
     # Replace 'ac2be905' and '0809ac9cd1c28ee2e43b387a5c182265' with actual values
     app_id = 'ac2be905'  # Edamam API app ID
     app_key = '0809ac9cd1c28ee2e43b387a5c182265'  # Edamam API app key
     result = requests.get(
-        'https://api.edamam.com/search?q={}&app_id={}&app_key={}'.format(ingredient, app_id, app_key)
+        'https://api.edamam.com/search?q={}&app_id={}&app_key={}'.format(
+            ingredient, app_id, app_key)
     )
     data = result.json()
     return data['hits']
+
 
 def save_to_json(recipes, ingredient):
     # Keep this function as it is
@@ -32,12 +39,12 @@ def save_to_json(recipes, ingredient):
             recipe_info = recipe['recipe']
             recipe_name = recipe_info['label']
             recipe_url = recipe_info['url']
-            recipe_image = recipe_info.get('image') #Updated to include image
+            recipe_image = recipe_info.get('image')  # Updated to include image
             ingredients = recipe_info['ingredientLines']
             recipes_list.append({
                 'Recipe': recipe_name,
                 'URL': recipe_url,
-                'Image': recipe_image, # Updated to include image
+                'Image': recipe_image,  # Updated to include image
                 'Ingredients': ingredients
             })
 
@@ -47,6 +54,7 @@ def save_to_json(recipes, ingredient):
         print(f"Recipes saved to {file_name}")
     else:
         print("No recipes found")
+
 
 @app.route('/')
 @app.route('/homepage')
@@ -63,6 +71,7 @@ def homepage():
 #         return redirect(url_for('homepage'))
 #     return render_template('recipes.html', title='Sign In', form=form)
 
+
 @app.route('/recipes', methods=['GET', 'POST'])
 def recipes():
     ingredients = request.args.get('ingredients')
@@ -71,19 +80,22 @@ def recipes():
     # Call the recipe_search function to fetch recipe data
     recipe_data = recipe_search(ingredients)
     # Save fetched recipe data to JSON
-    save_to_json(recipe_data, ingredients)
-    # recipe_data = f' these are the searched ingredients {ingredients}'
-    return render_template("recipes.html", data=recipe_data)
+    wip = save_to_json(recipe_data, ingredients)
+    # input WIP recipe_constructor()
+    formatted_data = recipe_constructor(wip)
+    return render_template("recipes.html", data=formatted_data)
+
 
 @app.route('/ingredients')
 def ingredients():
-    # alternatives = function_for_alternatives()
-    alternatives = [(1, 2, 3, 4), (5, 6, 7, 8)]
-    return render_template('ingredients.html', title='Ingredient Substitutions', given_ingredient='banana', data=alternatives)
+    ingredient = request.args.get('ingredients')
+    data = sql_function(ingredient)
+    return render_template('ingredients.html', title='Ingredient Substitutions', data=data)
 
 # @app.route('/converter', methods=['GET', 'POST'])
 # def converter():
 #     return render_template('converter.html', title='converter')
+
 
 @app.route('/converter', methods=['GET', 'POST'])
 def converter():
@@ -98,12 +110,14 @@ def converter():
             result = "Please insert a valid value"
     return render_template('converter.html', title='Converter', result=result)
 
+
 @app.route('/saves')
 def saves():
     data = requests.get("http://localhost:3000/")
     recipe_results = data.json()
     print(recipe_results)
-    #return render_template('saves.html', title='Saved recipes')
+    # return render_template('saves.html', title='Saved recipes')
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
