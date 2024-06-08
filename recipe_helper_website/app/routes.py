@@ -16,7 +16,6 @@ app.config.from_object(Config)
 @app.route('/')
 @app.route('/homepage')
 def homepage():
-    session['test'] = 'hello'
     return render_template('homepage.html', title='Home')
 
 
@@ -34,8 +33,8 @@ def recipes():
 @app.route('/ingredients')
 def ingredients():
     ingredient = request.args.get('ingredients')
-    data = sql_function(ingredient)
-    return render_template('ingredients.html', title='Ingredient Substitutions', data=data)
+    # data = sql_function(ingredient)
+    return render_template('ingredients.html', title='Ingredient Substitutions')
 
 
 @app.route('/converter', methods=['GET', 'POST'])
@@ -54,10 +53,10 @@ def converter():
 
 @app.route('/saves')
 def saves():
-    data = requests.get("http://localhost:3000/")
-    recipe_results = data.json()
-    print(recipe_results)
-    # return render_template('saves.html', title='Saved recipes')
+    pass
+    # data = requests.get("http://localhost:3000/")
+    # recipe_results = data.json()
+    return render_template('saves.html', title='Saved recipes')
 
 
 if __name__ == '__main__':

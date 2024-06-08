@@ -29,11 +29,9 @@
     {% endif %}
     {% endwith %}
 
-    {% block content %}{% endblock %}
-    <p hidden>{{}}</p>
+    <script src="cfg-group-2-project\recipe_helper_website\app\static\scripts\baseScript.js"></script>
 
-    <script
-      src="{{url_for('static', filename='cfg-group-2-project/recipe_helper_website/app/static/scripts/baseScript.js')}}"></script>
+    {% block content %}{% endblock %}
 </body>
 
 
