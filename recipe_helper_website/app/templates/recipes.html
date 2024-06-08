@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Recipe search</h1>
 <form action="/recipes">
-  <input type="text" name="ingredients" id="city" placeholder="Enter your ingredients" />
+  <input type="text" name="ingredients" id="recipe_id" placeholder="Enter your ingredients" />
   <button type="submit">Search</button>
 </form>
 {% if data %}
@@ -13,13 +13,11 @@
     <img src="{{api_img}}">
   </a>
   <ol>
-    <li>{{recipe_title}}</li>
-    <li>{{cook_time}}</li>
+    <li>{{row.title}}</li>
     <button onclick="">Save</button>
   </ol>
 
 </div>
-
 
 {%endfor%}
 {% else %}
