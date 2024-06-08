@@ -10,12 +10,11 @@
 {% for row in data%}
 <div>
   <a href="{{api_url}}" target="blank">
-    <img src="{{api_img}}">
+    <img src="{{row.img}}">
   </a>
-  <ol>
-    <li>{{row.title}}</li>
+  <div> <span>{{row.title}}</span>
     <button onclick="">Save</button>
-  </ol>
+  </div>
 
 </div>
 
