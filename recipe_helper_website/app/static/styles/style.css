@@ -5,40 +5,40 @@ body {
  }
 
 .content-box {
-    background-color: white; /* White background for the box */
-    padding: 10px;           /* Padding inside the box */
-    border-radius: 10px;     /* Optional: rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
-    max-width: 1000px;        /* Optional: max width for the box */
-    margin: 20px auto;       /* Center the box horizontally with auto margins */
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 20px auto;
  }
 
 .button {
-    background-color: #4CAF50; /* Green background */
-    border: none;              /* Remove default border */
-    color: white;              /* White text */
-    padding: 10px 10px;        /* Padding for the button */
-    text-align: center;        /* Center the text */
-    text-decoration: none;     /* Remove underline for links */
-    display: inline-block;     /* Inline-block for spacing */
-    font-size: 15px;           /* Font size */
-    margin: 10px 2px;          /* Margin around the button */
-    cursor: pointer;           /* Pointer cursor on hover */
-    border-radius: 5px;        /* Rounded corners */
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
   }
 
 .small-button {
-    background-color: #4CAF50; /* Green background */
-    border: none;              /* Remove default border */
-    color: white;              /* White text */
-    padding: 5px 5px;        /* Padding for the button */
-    text-align: center;        /* Center the text */
-    text-decoration: none;     /* Remove underline for links */
-    display: inline-block;     /* Inline-block for spacing */
-    font-size: 12px;           /* Font size */
-    margin: 10px 2px;          /* Margin around the button */
-    cursor: pointer;           /* Pointer cursor on hover */
-    border-radius: 5px;        /* Rounded corners */
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
   }
 
 .header1 {
@@ -57,16 +57,21 @@ body {
 .tab-button {
     background-color: #c3eeb8;
     border: none;
-    color: #428745;
+    color: white;
     padding: 5px 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 16px;
     margin: 10px 2px;
     cursor: pointer;
     border-radius: 5px;
+    font-weight: bold;
   }
+
+.tab-button:hover {
+  background-color: #4CAF50;
+}
 
 .input-box {
     width: 300px;
@@ -76,8 +81,7 @@ body {
 }
 
 .tab-header {
-    display: flex;              /* Use Flexbox */
-    justify-content: center;    /* Center the items horizontally */
-    gap: 10px;                  /* Optional: space between the buttons */
-    margin-bottom: 20px;        /* Optional: space below the tab buttons */
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
