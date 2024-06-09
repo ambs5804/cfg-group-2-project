@@ -105,3 +105,22 @@ body {
   row-gap: 10px;
   align-items: center;
 }
+
+.ingredient-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.ingredient-table tbody tr {
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.ingredient-table th {
+  background-color: #4CAF50;
+  color: white;
+  padding: 6px 15px;
+}
