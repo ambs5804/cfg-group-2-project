@@ -6,9 +6,6 @@
   <input type="text" name="ingredients" id="recipe_id" placeholder="Enter your ingredients" />
   <button type="submit">Search</button>
 </form>
-{% if error_message %}
-<p>{{error_message}}</p>
-{% endif %}
 {% if data %}
 {% for row in data %}
 <div>
