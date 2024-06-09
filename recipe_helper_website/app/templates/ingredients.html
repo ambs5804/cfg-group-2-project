@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Ingredient substitution finder</h1>
-<form action="/ingredients">
-  <input type="text" name="ingredients" placeholder="Milk,Meat,Cheese etc.">
-  <button type="submit">Search</button>
+<h1 class="header1">Ingredient Substitution Finder</h1>
+<form action="/ingredients" class="ingredients-search">
+  <input class="input-box" type="text" name="ingredients" placeholder="Dairy Milk, Meat, Cheese etc.">
+  <button class="small-button" type="submit">Search</button>
 </form>
 {% if data %}
-<h2>Alternatives for {{given_ingredient}}</h2>
-<table>
+<h2>Possible Alternatives: {{given_ingredient}}</h2>
+<table class="ingredient-table">
   <thead>
     <tr>
       <th> Name</th>
-      <th> Original amount</th>
-      <th> subbed amount</th>
-      <th> substitution type</th>
+      <th> Original Amount</th>
+      <th> Subbed amount</th>
+      <th> Substitution Type</th>
     </tr>
   </thead>
   <tbody>

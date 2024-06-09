@@ -18,8 +18,8 @@ const cur_recipe = recipe_data[index];
 
 // Function to render the list of ingredients
 function renderIngredientList(recipe) {
-  let ingredientHTML = `<h1>${recipe['title']}</h1> <img src="${recipe['img']}"> <a href="${recipe['url']}" target="blank">
-    <p>url</p></a> <button class = "saveButton"> save </button>`;
+  let ingredientHTML = `<h1 class="header1" >${recipe['title']}</h1> <img src="${recipe['img']}"> <a href="${recipe['url']}" target="blank">
+    <p>Click here to see full recipe</p></a> <button class = "small-button"> Save </button>`;
   let html = '';
   cur_recipe['ingredients'].forEach((ingredient) => {
     if (ingredient.convertable === true) {
