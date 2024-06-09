@@ -1,5 +1,0 @@
-API_ID = ""
-API_KEY = ""
-HOST = ""
-USER = ""
-PASSWORD = ""
