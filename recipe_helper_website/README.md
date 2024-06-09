@@ -16,12 +16,14 @@ Home
 
 1. Clone the repository.
 2. Install the required dependencies using `requirments.txt`
+   - `pip install -r requirements.txt`
 3. Set up the database and configure the connection in `config.py`.
   - Host = 'localhost'
   - User  = **this should be the name of your mysql workbench profile**
   - Password = **this should be your mysql workbench profile password**
 4. Create an account with [https://www.edamam.com/] for required `API_ID` and `API_KEY` in config.py
-4. Run the `routes.py` file to being the development server.
+5. Run the `routes.py` file to begin the development server.
+6. click the link in console to open the development server in your chosen browser
 
 ## Usage
 
