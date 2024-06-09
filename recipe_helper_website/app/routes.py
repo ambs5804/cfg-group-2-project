@@ -27,10 +27,11 @@ def recipes():
         mapped_api_data = recipe_search(ingredients)
         formatted_data = recipe_constructor(mapped_api_data)
         saveable_data = make_it_dict(formatted_data)
-        return render_template("recipes.html", data=formatted_data, recipe_data=saveable_data, title='Recipes')
+    except ValueError:
+        result = "Sorry this cannot be found, please try again."
     except Exception as e:
         print(e)
-        print("no")
+    return render_template("recipes.html", data=formatted_data, recipe_data=saveable_data, error=result, title='Recipes')
 
 
 @app.route('/ingredients')
