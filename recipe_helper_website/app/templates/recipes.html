@@ -9,9 +9,6 @@
 {% if data %}
 {% for row in data %}
 <div>
-  <!-- <a href="{{api_url}}" target="blank">
-    <img src="{{row.img}}">
-  </a> -->
   <a href="{{ url_for('recipe', id= row.id )}}" target="blank">
     <img src="{{row.img}}">
   </a>
@@ -30,7 +27,4 @@
 {% block dataSave %}
 let data1 = {{ recipe_data| tojson }};
 localStorage.setItem('recipes', JSON.stringify(data1));
-let recipe_data = JSON.parse(localStorage.getItem('recipes'));
-
-console.log(recipe_data);
 {% endblock %}
