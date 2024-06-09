@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Recipe search</h1>
+<h1 class="header1" >Recipe Search</h1>
 <form action="/recipes">
-  <input type="text" name="ingredients" id="recipe_id" placeholder="Enter your ingredients" />
-  <button type="submit">Search</button>
+  <input class="input-box" type="text" name="ingredients" id="recipe_id" placeholder="Enter your ingredients" />
+  <button class="small-button" type="submit">Search</button>
 </form>
 {% if data %}
 {% for row in data %}
@@ -12,10 +12,12 @@
   <a href="{{ url_for('recipe', id= row.id )}}" target="blank">
     <img src="{{row.img}}">
   </a>
-  <div id="{{row.id}}"> {{row.id}}<span>{{row.title}}</span>
-    <button onclick="">Save</button>
-  </div>
 
+  <div id="{{row.id}}"> {{row.id}}<span class="recipe-title">{{row.title}}</span>
+    <button class="small-button" onclick="">Save</button>
+  </div>
+  <br>
+  <br>
 </div>
 
 {% endfor %}
