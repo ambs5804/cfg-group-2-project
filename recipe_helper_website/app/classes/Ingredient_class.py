@@ -19,5 +19,13 @@ class Ingredient():
             self.item = ingredient
             self.convertable = False
 
+    def __dict__(self):
+        return {
+            "quantity": self.quantity,
+            "unit": self.unit,
+            "item": self.item,
+            "convertable": self.convertable
+        }
+
     def __repr__(self):
         return f"{self.quantity} - {self.unit} - {self.item} - {self.convertable}"

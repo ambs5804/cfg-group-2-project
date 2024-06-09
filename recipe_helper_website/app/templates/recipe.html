@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<p></p>
+<p></p>
+<script src="{{url_for('static', filename='scripts/converter.js')}}"></script>
+<div>
+  <label for="to_unit">Convert to:</label>
+  <select id="to_unit" onchange="convertUnits(), console.log('changed')" name="to_unit" required>
+    <option value="original">Original</option>
+    <option value="g">Gram</option>
+    <option value="cups">Cup</option>
+    <option value="ml">Millilitre</option>
+    <option value="oz">Ounce</option>
+    <option value="tbsp">Tablespoon</option>
+    <option value="tsp">Teaspoon</option>
+    <option value="fl oz">Fluid Ounce</option>
+  </select>
+</div>
+
+
+<div class="ingredient-list">
+</div>
+<script src="{{url_for('static', filename='scripts/recipe.js')}}"></script>
+{% endblock %}
+
+{% block dataSave %}
+
+{% endblock %}

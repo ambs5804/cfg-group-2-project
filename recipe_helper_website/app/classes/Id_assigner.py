@@ -1,9 +1,15 @@
 import itertools
 
+# Class to assign unique IDs to objects
+
 
 class ID:
-    def __init__(self):
-        self.recipe_id = itertools.count(start=1, step=1)
+    _counter = itertools.count()
 
-    def make_id(self):
-        return next(self.recipe_id)
+    @classmethod
+    def make_id(cls):
+        return next(ID._counter)
+
+    @classmethod
+    def reset(cls, start=0):
+        ID._counter = itertools.count(start)

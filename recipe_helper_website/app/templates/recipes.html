@@ -7,20 +7,26 @@
   <button class="small-button" type="submit">Search</button>
 </form>
 {% if data %}
-{% for row in data%}
+{% for row in data %}
 <div>
-  <a href="{{api_url}}" target="blank">
+  <a href="{{ url_for('recipe', id= row.id )}}" target="blank">
     <img src="{{row.img}}">
   </a>
-  <div> <span class="recipe-title">{{row.title}}</span>
+
+  <div id="{{row.id}}"> {{row.id}}<span class="recipe-title">{{row.title}}</span>
     <button class="small-button" onclick="">Save</button>
   </div>
   <br>
   <br>
 </div>
 
-{%endfor%}
+{% endfor %}
 {% else %}
 {% endif %}
 
+{% endblock %}
+
+{% block dataSave %}
+let data1 = {{ recipe_data| tojson }};
+localStorage.setItem('recipes', JSON.stringify(data1));
 {% endblock %}

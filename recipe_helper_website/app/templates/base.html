@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 
-<head>
+<head class="Head">
   {% if title %}
   <title>{{ title }} - Kitchen Assisant</title>
   {% else %}
@@ -30,7 +30,13 @@
     {% endif %}
     {% endwith %}
 
-    <script src="cfg-group-2-project\recipe_helper_website\app\static\scripts\baseScript.js"></script>
+    <script src="{{url_for('static', filename='scripts/baseScript.js')}}"></script>
+    <script>
+      {% block dataSave %}
+
+
+      {% endblock %}
+    </script>
 
     {% block content %}{% endblock %}
 </body>
