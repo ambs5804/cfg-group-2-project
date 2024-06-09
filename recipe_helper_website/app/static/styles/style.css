@@ -105,19 +105,3 @@ body {
   row-gap: 10px;
   align-items: center;
 }
-
-.grid-item {
-  border-radius: 10px;
-  width: 100%; /* Ensures grid items take full width of grid column */
-  max-width: 150px;
-
-
-.grid-item2 {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Ensures grid items take full width of grid column */
-  max-width: 200px; /* Limits the maximum width */
-}

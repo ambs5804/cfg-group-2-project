@@ -10,7 +10,7 @@
 <div class="grid">
 {% if data %}
 {% for row in data %}
-<div class="grid-item2">
+<div>
   <a href="{{ url_for('recipe', id= row.id )}}" target="blank">
     <img src="{{row.img}}">
   </a>
