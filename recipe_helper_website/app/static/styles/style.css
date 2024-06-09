@@ -124,3 +124,22 @@ body {
   color: white;
   padding: 6px 15px;
 }
+
+ingredient-list-recipe {
+  font-size: 14px;
+  text-align: left;
+}
+
+.ingredients-search {
+  display: flex;
+  justify-content: center; /* Align items horizontally */
+  align-items: center;     /* Align items vertically */
+  margin-top: 10px;        /* Add space above the form */
+}
+
+.recipe-img {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  height: 200px;           /* Set the height of the container */
+}
