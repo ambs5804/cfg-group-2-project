@@ -6,14 +6,19 @@
   <input class="input-box" type="text" name="ingredients" id="recipe_id" placeholder="Enter your ingredients" />
   <button class="small-button" type="submit">Search</button>
 </form>
+
+<div class="grid">
 {% if data %}
 {% for row in data %}
-<div>
+<div class="grid-item2">
   <a href="{{ url_for('recipe', id= row.id )}}" target="blank">
     <img src="{{row.img}}">
   </a>
 
-  <div id="{{row.id}}"> {{row.id}}<span class="recipe-title">{{row.title}}</span>
+  <div id="{{row.id}}">
+    <a href="{{ url_for('recipe', id= row.id )}}" target="blank">
+      <span class="recipe-title">{{row.title}}</span>
+  </a>
     <button class="small-button" onclick="">Save</button>
   </div>
   <br>
@@ -21,6 +26,8 @@
 </div>
 
 {% endfor %}
+</div>
+
 {% else %}
 {% endif %}
 

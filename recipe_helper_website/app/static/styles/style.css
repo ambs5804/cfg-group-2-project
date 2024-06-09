@@ -57,9 +57,13 @@ body {
  }
 
 .recipe-title {
- text-align: center;
+ display: block;
+ font-size: 15px;
+ text-align: start;
  color: black;
  text-decoration: underline;
+ width: 100%;
+ white-space: nowrap;
  }
 
 .tab-button {
@@ -92,4 +96,28 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 150px 150px 150px;
+  column-gap: 200px;
+  row-gap: 10px;
+  align-items: center;
+}
+
+.grid-item {
+  border-radius: 10px;
+  width: 100%; /* Ensures grid items take full width of grid column */
+  max-width: 150px;
+
+
+.grid-item2 {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensures grid items take full width of grid column */
+  max-width: 200px; /* Limits the maximum width */
 }
