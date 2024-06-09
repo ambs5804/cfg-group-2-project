@@ -7,6 +7,10 @@ import secrets
 from db_utils import find_substitution
 
 
+class EmptyListException(Exception):
+    pass
+
+
 app = Flask(__name__)
 # Keep this line to generate a random secret key
 app.secret_key = secrets.token_hex(16)
@@ -27,11 +31,15 @@ def recipes():
         mapped_api_data = recipe_search(ingredients)
         formatted_data = recipe_constructor(mapped_api_data)
         saveable_data = make_it_dict(formatted_data)
-    except ValueError:
-        result = "Sorry this cannot be found, please try again."
+        result = None
+        if not formatted_data:  # Check if the list is empty
+            raise EmptyListException("Not found")
+    except EmptyListException:
+        result = "No recipes found. Please try again."
     except Exception as e:
         print(e)
-    return render_template("recipes.html", data=formatted_data, recipe_data=saveable_data, error=result, title='Recipes')
+        print("no")
+    return render_template("recipes.html", data=formatted_data, recipe_data=saveable_data, title='Recipes', error=result)
 
 
 @app.route('/ingredients')

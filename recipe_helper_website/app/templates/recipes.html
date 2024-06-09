@@ -1,31 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="header1" >Recipe Search</h1>
+<h1 class="header1">Recipe Search</h1>
 <form class="ingredients-search" action="/recipes">
-  <input class="input-box" type="text" name="ingredients" id="recipe_id" placeholder="Enter your ingredients eg. Cheese, Chicken, Pasta" />
+  <input class="input-box" type="text" name="ingredients" id="recipe_id"
+    placeholder="Enter your ingredients eg. Cheese, Chicken, Pasta" />
   <button class="small-button" type="submit">Search</button>
 </form>
-
+{% if error %}
+<p>
+  <centre>{{error}}</centre>
+</p>
+{% endif %}
 <div class="grid">
-{% if data %}
-{% for row in data %}
-<div>
-  <a href="{{ url_for('recipe', id= row.id )}}" target="blank">
-    <img src="{{row.img}}">
-  </a>
-
-  <div id="{{row.id}}">
+  {% if data %}
+  {% for row in data %}
+  <div>
     <a href="{{ url_for('recipe', id= row.id )}}" target="blank">
-      <span class="recipe-title">{{row.title}}</span>
-  </a>
-    <button class="small-button" onclick="">Save</button>
-  </div>
-  <br>
-  <br>
-</div>
+      <img src="{{row.img}}">
+    </a>
 
-{% endfor %}
+    <div id="{{row.id}}">
+      <a href="{{ url_for('recipe', id= row.id )}}" target="blank">
+        <span class="recipe-title">{{row.title}}</span>
+      </a>
+      <button class="small-button" onclick="">Save</button>
+    </div>
+    <br>
+    <br>
+  </div>
+
+  {% endfor %}
 </div>
 
 {% else %}
