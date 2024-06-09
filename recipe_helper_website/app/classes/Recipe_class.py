@@ -28,6 +28,12 @@ pattern10 = re.compile(r"\u00BC")
 pattern11 = re.compile(r"\u00bd")
 # None
 pattern12 = re.compile(r"None")
+# digit 1⁄2
+pattern13 = re.compile(r"(\d+)\u00bd")
+# digit 1⁄4
+pattern14 = re.compile(r"(\d+)\u00BC")
+# unicode -
+pattern15 = re.compile(r"\s?\u2013\s?")
 
 
 class Recipe:
@@ -73,6 +79,9 @@ class Recipe:
         substitution9 = "oz"
         substitution10 = "1/4"
         substitution11 = "1/2"
+        substitution12 = "\1 1/2"
+        substitution13 = "\1 1/4"
+        substitution14 = " "
 
         #
         standardised = re.sub(patter6, substitution6, ingredient, 0)
@@ -81,6 +90,9 @@ class Recipe:
             pattern11, substitution11, standardised, 0)
         standardised = re.sub(
             pattern12, substitution2, standardised, 0)
+        standardised = re.sub(pattern13, substitution12, standardised, 0)
+        standardised = re.sub(pattern14, substitution13, standardised, 0)
+        standardised = re.sub(pattern15, substitution14, standardised, 0)
         standardised = re.sub(
             pattern1, substitution, standardised, 0)
         standardised = re.sub(
