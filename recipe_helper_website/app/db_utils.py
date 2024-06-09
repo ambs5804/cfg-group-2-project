@@ -23,15 +23,20 @@ def find_substitution(sub_ingredient):
         db_name = "SUBSTITUTIONS"
         db_connection = _connect_to_db(db_name)
         cursor = db_connection.cursor()
-        substituiton_search = """SELECT
-    fi.Food_Name AS Original_Ingredient,
-    fa.Food_Name AS Alternative_Ingredient
+        substituiton_search = """
+SELECT
+    fi.Food_Name AS Original_Food,
+	alt.Food_Name AS Alternative_Food,
+    fi.Quantity AS Original_Quantity,
+    fi.Category AS Original_Category,
+    alt.Quantity AS Alternative_Quantity,
+    alt.Category AS Alternative_Category
 FROM
     Alternatives a
 JOIN
     FoodItems fi ON a.Food_ID = fi.Food_ID
 JOIN
-    FoodItems fa ON a.Alternative_Food_ID = fa.Food_ID
+    FoodItems alt ON a.Alternative_Food_ID = alt.Food_ID
 WHERE
 	fi.Food_Name = '{}';""".format(sub_ingredient)
         cursor.execute(substituiton_search)
