@@ -7,7 +7,7 @@ from classes.Id_assigner import ID
 pattern1 = re.compile(r"(\d+\s?\w+)\/\d+\w+", re.MULTILINE)
 # brackets  (3 1/2 cups)
 pattern2 = re.compile(
-    r"\s\(\d+.?\s?\w+(\/\d+\s?\w+)?\)", re.MULTILINE,)
+    r"\s\(\d+.?\s?\w+(\/\d+\s?\w+)?\)", re.MULTILINE)
 # 1 /3
 pattern3 = re.compile(r"(\d+)\s?(\/\d)")
 # tablespoon, tbsp., Tbsp., Tbsp
@@ -22,16 +22,31 @@ pattern7 = re.compile(r"grams?|Grams?", re.IGNORECASE)
 pattern8 = re.compile(r"millilitres?|ML", re.IGNORECASE)
 # ounces, OZ
 pattern9 = re.compile(r"ounces?|OZ", re.IGNORECASE)
+# U+00BC 1⁄4
+pattern10 = re.compile(r"\u00BC")
+# 1⁄2
+pattern11 = re.compile(r"\u00bd")
+# None
+pattern12 = re.compile(r"None")
 
 
 class Recipe:
 
     def __init__(self, title, url, img, ingredients):
-        self.id = ID().make_id()
+        self.id = ID.make_id()
         self.title = title
         self.url = url
         self.img = img
         self.ingredients = Recipe._standardise_ingredients(ingredients)
+
+    def __dict__(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "url": self.url,
+            "img": self.img,
+            "ingredients": [ingredient.__dict__() for ingredient in self.ingredients]
+        }
 
   # debugging
     def __str__(self):
@@ -56,8 +71,16 @@ class Recipe:
         substitution7 = "g"
         substitution8 = "ml"
         substitution9 = "oz"
+        substitution10 = "1/4"
+        substitution11 = "1/2"
+
         #
         standardised = re.sub(patter6, substitution6, ingredient, 0)
+        standardised = re.sub(pattern10, substitution10, standardised, 0)
+        standardised = re.sub(
+            pattern11, substitution11, standardised, 0)
+        standardised = re.sub(
+            pattern12, substitution2, standardised, 0)
         standardised = re.sub(
             pattern1, substitution, standardised, 0)
         standardised = re.sub(
