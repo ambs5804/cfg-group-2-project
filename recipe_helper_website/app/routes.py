@@ -4,6 +4,7 @@ from converter import convert_units
 from recipe_constructor import recipe_constructor, make_it_dict
 from api_utils import recipe_search
 import secrets
+from db_utils import find_substitution
 
 
 app = Flask(__name__)
@@ -32,11 +33,11 @@ def recipes():
         print("no")
 
 
-@ app.route('/ingredients')
+@app.route('/ingredients')
 def ingredients():
-    ingredient = request.args.get('ingredients')
-    # data = sql_function(ingredient)
-    return render_template('ingredients.html', title='Ingredient Substitutions')
+    sub_ingredient = request.args.get('ingredients')
+    substitutes = find_substitution(sub_ingredient)
+    return render_template('ingredients.html', title='Ingredient Substitutions', substitutes=substitutes)
 
 
 @ app.route('/converter', methods=['GET', 'POST'])
@@ -62,8 +63,7 @@ def recipe(id):
 @ app.route('/saves')
 def saves():
     pass
-    # data = requests.get("http://localhost:3000/")
-    # recipe_results = data.json()
+    # This feature is not implemented yet, but it will be in the future
     return render_template('saves.html', title='Saved recipes')
 
 
