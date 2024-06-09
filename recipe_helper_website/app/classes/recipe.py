@@ -1,8 +1,9 @@
 import re
+from classes.ingredient import Ingredient
 
-from classes.Ingredient_class import Ingredient
+from classes.id import ID
 
-from classes.Id_assigner import ID
+# There was no way to test this static function while it was insided the class without affecting the ability of the app to run. The imports of classes for the app need to be listed as (e.g. from classes.ingredeient import ingredient) but when running a testing suite, it would return an error with this import file path - therfore a separte version of the function is used. This function is a static method in recipe that standardises the ingredients provided in the mapped api data.
 
 pattern1 = re.compile(r"(\d+\s?\w+)\/\d+\w+", re.MULTILINE)
 # brackets  (3 1/2 cups)
@@ -27,13 +28,9 @@ pattern10 = re.compile(r"\u00BC")
 # 1⁄2
 pattern11 = re.compile(r"\u00bd")
 # None
-pattern12 = re.compile(r"None")
-# digit 1⁄2
-pattern13 = re.compile(r"(\d+)\u00bd")
-# digit 1⁄4
-pattern14 = re.compile(r"(\d+)\u00BC")
+pattern12 = re.compile(r"None\s?")
 # unicode -
-pattern15 = re.compile(r"\s?\u2013\s?")
+pattern13 = re.compile(r"\s?\u2013\s?")
 
 
 class Recipe:
@@ -79,9 +76,7 @@ class Recipe:
         substitution9 = "oz"
         substitution10 = "1/4"
         substitution11 = "1/2"
-        substitution12 = "\1 1/2"
-        substitution13 = "\1 1/4"
-        substitution14 = " "
+        substitution12 = " "
 
         #
         standardised = re.sub(patter6, substitution6, ingredient, 0)
@@ -91,8 +86,6 @@ class Recipe:
         standardised = re.sub(
             pattern12, substitution2, standardised, 0)
         standardised = re.sub(pattern13, substitution12, standardised, 0)
-        standardised = re.sub(pattern14, substitution13, standardised, 0)
-        standardised = re.sub(pattern15, substitution14, standardised, 0)
         standardised = re.sub(
             pattern1, substitution, standardised, 0)
         standardised = re.sub(

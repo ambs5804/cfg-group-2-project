@@ -28,4 +28,4 @@ class Ingredient():
         }
 
     def __repr__(self):
-        return f"{self.quantity} - {self.unit} - {self.item} - {self.convertable}"
+        return f"{self.quantity},{self.unit},{self.item},{self.convertable}"

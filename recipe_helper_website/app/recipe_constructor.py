@@ -1,4 +1,4 @@
-from classes.Recipe_class import Recipe
+from classes.recipe import Recipe
 
 
 def recipe_constructor(data):
