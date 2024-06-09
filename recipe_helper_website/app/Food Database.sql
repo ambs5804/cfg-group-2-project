@@ -1,17 +1,5 @@
 CREATE DATABASE SUBSTITUTIONS;
-
-CREATE TABLE vegan_alternatives (
-original_ingredient VARCHAR(100),
-quantity integer,
-subbed_ingredient VARCHAR (100),
-subbed_quantity integer
-);
-
--- INSERT INTO vegan_alternatives (original_ingredient, quantity, subbed_ingredient, subbed_quantity)
-VALUES ('cows milk', 50, 'oat milk', 50),
-('dairy_butter',50,'margerine',50);
-
-DROP TABLE vegan_alternatives;
+USE SUBSTITUTIONS;
 
 CREATE TABLE FoodItems(
 Food_ID INTEGER,
@@ -38,7 +26,7 @@ ALTER TABLE FoodItems
 MODIFY COLUMN quantity VARCHAR(100);
 
 INSERT INTO FoodItems (Food_Name, Category, Quantity)
-VALUES ('Dairy Milk', 'Dairy', '100ml'),
+VALUES ('Milk', 'Dairy', '100ml'),
 ('Oat Milk', 'Plant Based', '100ml'),
 ('Almond Milk','Plant Based', '100ml'),
 ('Soya Milk', 'Plant Based', '100ml'),
@@ -104,14 +92,3 @@ VALUES (1,2),
 (33,34),
 (33,35),
 (36,37);
-
-
-SELECT 
-    fi.Food_Name AS Original_Ingredient, 
-    fa.Food_Name AS Alternative_Ingredient
-FROM 
-    Alternatives a
-JOIN 
-    FoodItems fi ON a.Food_ID = fi.Food_ID
-JOIN 
-    FoodItems fa ON a.Alternative_Food_ID = fa.Food_ID;
